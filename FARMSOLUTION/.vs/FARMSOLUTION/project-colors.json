@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "649257a1-29ad-48f1-bbf5-adba58d0d3ee": {
+      "ProjectGuid": "649257a1-29ad-48f1-bbf5-adba58d0d3ee",
+      "DisplayName": "FarmAPI",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
