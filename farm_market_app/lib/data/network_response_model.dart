@@ -64,7 +64,7 @@ class NetworkResponse<T> with ToastUtils {
   NetworkResponse.withErrorConvert(error) {
     errorToast('msg_error_convert'.tr);
     this.msg = 'msg_error_convert'.tr;
-    this.data = null;
+    this.data = error;
   }
 
   NetworkResponse.withDisconnect() {

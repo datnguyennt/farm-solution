@@ -10,7 +10,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class LoginEmailPage extends GetView<LoginEmailController> {
-  const LoginEmailPage({Key? key}) : super(key: key);
+  final loginZaloController = Get.put(LoginZaloController());
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,10 @@ class LoginEmailPage extends GetView<LoginEmailController> {
             Align(
               alignment: Alignment.topRight,
               child: InkWell(
-                onTap: () => {Get.toNamed(Routes.HOME)},
+                onTap: () {
+                  Get.toNamed(Routes.HOME);
+                  controller.clearTextField();
+                },
                 child: Container(
                   width: 50.r,
                   height: 50.r,
@@ -104,21 +107,34 @@ class LoginEmailPage extends GetView<LoginEmailController> {
                 ),
               ),
               SizedBox(height: 5.h),
-              Container(
-                margin: EdgeInsets.symmetric(
-                  horizontal: 25.w,
-                ),
-                child: TextField(
-                  controller: controller.passwordController,
-                  keyboardType: TextInputType.visiblePassword,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(20.0),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.r),
-                      ),
-                      fillColor: AppColor.backgroundColor,
-                      hintText: 'Nhập vào mật khẩu'),
+              Obx(
+                () => Container(
+                  margin: EdgeInsets.symmetric(
+                    horizontal: 25.w,
+                  ),
+                  child: TextField(
+                    controller: controller.passwordController,
+                    keyboardType: TextInputType.text,
+                    obscureText: controller.obscureText.value,
+                    decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(20.0),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.r),
+                        ),
+                        fillColor: AppColor.backgroundColor,
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            controller.obscureText.value
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                          ),
+                          onPressed: () {
+                            controller.obscureText.value =
+                                !controller.obscureText.value;
+                          },
+                        ),
+                        hintText: 'Nhập vào mật khẩu'),
+                  ),
                 ),
               ),
               SizedBox(height: 16.h),
@@ -191,7 +207,9 @@ class LoginEmailPage extends GetView<LoginEmailController> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    _customButton(AppImages.iconLoginZalo, () {}),
+                    _customButton(AppImages.iconLoginZalo, () async {
+                      await loginZaloController.loginZalo();
+                    }),
                     SizedBox(
                       width: 10.w,
                     ),

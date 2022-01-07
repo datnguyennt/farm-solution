@@ -33,15 +33,8 @@ class HomeController extends GetxController {
   @override
   void onInit()async {
     super.onInit();
+    tabIndex = 0;
     await requestLocationPermission();
   }
-
-  @override
-  void onReady() async {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {}
 }
 

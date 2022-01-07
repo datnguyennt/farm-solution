@@ -1,9 +1,12 @@
 import 'dart:io';
 
 import 'package:farm_market_app/constants/app_images.dart';
+import 'package:farm_market_app/constants/constants.dart';
 import 'package:farm_market_app/controllers/controller.dart';
 import 'package:farm_market_app/core/core.dart';
 import 'package:farm_market_app/routes/app_routes.dart';
+import 'package:farm_market_app/services/firebase_api.dart';
+import 'package:farm_market_app/utils/toast/toast_utils.dart';
 import 'package:farm_market_app/views/login/login_otp.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -12,9 +15,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-class LoginPage extends GetView<LoginController> {
-  const LoginPage({Key? key}) : super(key: key);
-
+class LoginPage extends GetView<LoginController>{
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -28,12 +29,10 @@ class LoginPage extends GetView<LoginController> {
             Align(
               alignment: Alignment.topRight,
               child: InkWell(
-                onTap: () => {
-                  Get.toNamed(Routes.HOME)
-                },
+                onTap: () => {Get.toNamed(Routes.HOME)},
                 child: Container(
-                  width: 50.r,
-                  height: 50.r,
+                  width: 25.r,
+                  height: 25.r,
                   child: Center(
                     child: SvgPicture.asset(
                       AppImages.iconLoginClose,
@@ -46,7 +45,7 @@ class LoginPage extends GetView<LoginController> {
             ),
             Align(
               alignment: Alignment.topCenter,
-              child: viewLoginWithSocial(),
+              child: viewLoginWithSocial(context),
             ),
             legalText(),
           ]),
@@ -55,7 +54,7 @@ class LoginPage extends GetView<LoginController> {
     );
   }
 
-  Widget viewLoginWithSocial() {
+  Widget viewLoginWithSocial(BuildContext context) {
     return Stack(
       children: [
         Align(
@@ -92,49 +91,109 @@ class LoginPage extends GetView<LoginController> {
               SizedBox(
                 height: 20.h,
               ),
-              Container(
-                margin: EdgeInsets.symmetric(
-                  horizontal: 25.w,
-                ),
-                child: TextField(
-                  keyboardType: TextInputType.phone,
-                  maxLength: 10,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.r),
+              GetBuilder<LoginController>(
+                builder: (_controller) {
+                  return Container(
+                    height: 55.h,
+                    margin: EdgeInsets.symmetric(horizontal: 10.w),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: _controller.isValid.value == true
+                            ? AppColor.gray
+                            : AppColor.red,
                       ),
-                      fillColor: AppColor.backgroundColor,
-                      hintText: 'Nhập vào số điện thoại'),
-                ),
+                      borderRadius: BorderRadius.circular(10.r),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          alignment: Alignment.center,
+                          width: 80.w,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                AppImages.iconVietNam,
+                                width: 30.w,
+                                height: 30.w,
+                              ),
+                              Text(
+                                '+84',
+                                style: AppTextStyle.regular14(
+                                    color: AppColor.black),
+                              )
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: TextFormField(
+                            keyboardType: TextInputType.phone,
+                            maxLines: 1,
+                            textAlign: TextAlign.left,
+                            controller: controller.phoneNumberController,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              errorStyle: TextStyle(height: 0.h),
+                              fillColor: AppColor.backgroundColor,
+                              hintText: '0344 768 831',
+                              suffixIcon: IconButton(
+                                icon: const Icon(Icons.close_outlined),
+                                onPressed: () {
+                                  controller.clearText();
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
               ),
               SizedBox(height: 16.h),
-              InkWell(
-                onTap: () {
-                  Get.to(()=> LoginOTPPage());
-                  print('Login');
-                },
-                child: Container(
-                  width: 160.w,
-                  height: 44.h,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50.r),
-                    gradient: AppColor.linearGreen,
-                  ),
-                  alignment: Alignment.center,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+              Obx(
+                () => AbsorbPointer(
+                  absorbing: controller.isLoading.value ? true : false,
+                  child: Stack(
+                    alignment: Alignment.center,
                     children: [
-                      Text(
-                        'Tiếp theo',
-                        style: AppTextStyle.regular14(
-                          color: AppColor.white,
+                      InkWell(
+                        onTap: () {
+                          controller.validateForm(context);
+                        },
+                        child: Container(
+                          width: 160.w,
+                          height: 44.h,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50.r),
+                            gradient: AppColor.linearGreen,
+                          ),
+                          alignment: Alignment.center,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Tiếp theo',
+                                style: AppTextStyle.regular14(
+                                  color: AppColor.white,
+                                ),
+                              ),
+                              Icon(
+                                Icons.arrow_forward_ios_outlined,
+                                color: AppColor.white,
+                                size: 15.h,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                      Icon(
-                        Icons.arrow_forward_ios_outlined,
-                        color: AppColor.white,
-                        size: 15.h,
-                      ),
+                      controller.isLoading.value
+                          ? const CircularProgressIndicator()
+                          : Container(),
                     ],
                   ),
                 ),
@@ -170,9 +229,12 @@ class LoginPage extends GetView<LoginController> {
                     SizedBox(
                       width: 10.w,
                     ),
-                    _customButton(AppImages.iconLoginGoogle, (){
-                      Get.toNamed(Routes.LOGIN_EMAIL);
-                    },),
+                    _customButton(
+                      AppImages.iconLoginGoogle,
+                      () {
+                        Get.toNamed(Routes.LOGIN_EMAIL);
+                      },
+                    ),
                     SizedBox(
                       width: 10.w,
                     ),

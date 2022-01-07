@@ -5,5 +5,6 @@ class OnBoardingBinding extends Bindings {
   @override
   void dependencies() {
     Get.put<OnBoardingController>(OnBoardingController());
+    Get.lazyPut<DashboardController>(() => DashboardController());
   }
 }

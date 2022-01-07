@@ -3,11 +3,11 @@ part 'login_request.g.dart';
 
 @JsonSerializable()
 class LoginRequest {
-String? LoginName;
-String? Password;
+String? loginName;
+String? password;
 
   LoginRequest(
-      {this.LoginName, this.Password});
+      {this.loginName, this.password});
 
   factory LoginRequest.fromJson(Map<String, dynamic> json) =>
       _$LoginRequestFromJson(json);

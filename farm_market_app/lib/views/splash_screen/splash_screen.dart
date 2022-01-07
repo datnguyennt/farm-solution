@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+int? isviewed;
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -28,13 +29,15 @@ class _SplashScreenState extends State<SplashScreen> {
     } catch (Excepetion) {
     }
   }
+  Future getView()async{
+    isviewed = sharedPref.read("viewd");
+  }
   @override
   void initState() {
     // TODO: implement initState
-
     getValidation().whenComplete(()async{
-      Future.delayed(Duration(seconds: 2)).then((_) {
-        Get.toNamed(userLoad.fullName == null ? Routes.ONBOARDING : Routes.HOME);
+      Future.delayed(const Duration(seconds: 2)).then((_) {
+        Get.offAllNamed(userLoad.fullName == null ? Routes.ONBOARDING : Routes.HOME);
       });
     });
     super.initState();
@@ -43,7 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Container(
+        child: SizedBox(
           height: 120.h,
           width: 120.h,
           child: Image.asset(AppImages.splashScreen),

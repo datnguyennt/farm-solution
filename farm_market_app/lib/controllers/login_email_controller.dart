@@ -1,55 +1,93 @@
-import 'dart:convert';
-
-import 'package:dio/dio.dart';
+import 'package:farm_market_app/constants/constants.dart';
 import 'package:farm_market_app/controllers/controller.dart';
 import 'package:farm_market_app/core/global/globals.dart';
 import 'package:farm_market_app/data/data.dart';
-import 'package:farm_market_app/data/entity/account.dart';
+import 'package:farm_market_app/data/request/login_request.dart';
+import 'package:farm_market_app/data/response/login_response.dart';
 import 'package:farm_market_app/routes/app_routes.dart';
-import 'package:farm_market_app/services/remote_service.dart';
 import 'package:farm_market_app/utils/toast/toast_utils.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginEmailController extends GetxController with ToastUtils {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  final _homeController = Get.put(HomeController());
   SharedPref sharedPref = SharedPref();
-  final Dio _dio = Dio();
+  Position? position;
   var username = ''.obs;
   var password = ''.obs;
   RxBool isLoading = false.obs;
-  final UserProvider _provider = UserProvider();
+  RxBool obscureText = true.obs;
+  final LoginUsecase _loginUsecase = LoginUsecase();
+  LoginRequest request = LoginRequest();
 
   Future loginUser() async {
-    username.value = emailController.text;
-    password.value = passwordController.text;
+    username.value = emailController.text.trim();
+    password.value = passwordController.text.trim();
+    // username.value = '0344976831';
+    // password.value = '123456';
     if (username.value.isNotEmpty && password.value.isNotEmpty) {
       isLoading.value = true;
-      var pos = await _provider.loginUser(
-          username.value.trim(), password.value.trim());
-      print(pos.token);
-      if (pos.account != null) {
-        Globals.setMainUser(pos.account!);
+      request = LoginRequest(
+          loginName: username.value.trim(), password: password.value.trim());
+      print(request);
+      var pos = await _loginUsecase.loginResponse(request);
+      if (pos.status == StatusResponse.OK) {
+        Globals.setMainUser(pos.data!.account!);
         sharedPref.save("user", Globals.mainUser);
-        emailController.clear();
-        passwordController.clear();
-        _homeController.tabIndex = 0;
+        clearTextField();
         isLoading.value = false;
-        Get.toNamed(Routes.HOME);
+        Get.offAllNamed(Routes.HOME);
       } else {
         isLoading.value = false;
-        errorToast('Sai tên đăng nhặp hoặc mật khẩu');
+        errorToast(pos.message.toString());
       }
-    }else{
+    } else {
       errorToast('Không được bỏ trống tên đăng nhập và mật khẩu');
     }
+  }
+
+  void clearTextField() {
+    emailController.clear();
+    passwordController.clear();
+  }
+  Future<Position> getGeoLocationPosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      await Geolocator.openLocationSettings();
+      return Future.error('Location services are disabled.');
+    }
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+    return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.medium);
+  }
+
+  @override
+  void onInit() async {
+    // TODO: implement onInit
+    super.onInit();
+    obscureText.value = true;
+    position = await getGeoLocationPosition();
   }
 
   @override
   void onClose() {
     super.onClose();
+    isLoading.value = false;
+    clearTextField();
   }
 }

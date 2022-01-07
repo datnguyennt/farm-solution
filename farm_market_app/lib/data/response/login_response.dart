@@ -1,15 +1,15 @@
-import 'package:farm_market_app/data/entity/account.dart';
-import 'package:farm_market_app/data/entity/history_money.dart';
+import 'package:farm_market_app/data/entity/entity.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'login_response.g.dart';
 
 @JsonSerializable()
 class LoginResponse {
-  @JsonKey(name: "account")
-  Account? account;
-  @JsonKey(name: "token")
-  String? token;
-
+  @JsonKey(name: "data")
+  DataAccount? data;
+  @JsonKey(name: "status")
+  String? status;
+  @JsonKey(name: "message")
+  String? message;
   LoginResponse();
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) =>

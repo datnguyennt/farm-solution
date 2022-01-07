@@ -1,6 +1,4 @@
 import 'package:farm_market_app/binding/binding.dart';
-import 'package:farm_market_app/binding/login_email_binding.dart';
-import 'package:farm_market_app/views/login/login_email_page.dart';
 import 'package:farm_market_app/views/views.dart';
 import 'package:get/get.dart';
 
@@ -22,6 +20,11 @@ class AppPages {
       name: Routes.LOGIN,
       page: () => LoginPage(),
       binding: LoginBinding(),
+    ),
+    GetPage(
+      name: Routes.CHANGE_PASSWORD,
+      page: () => ChangePasswordPage(),
+      binding: ChangePasswordBinding(),
     ),
     GetPage(
       name: Routes.LOGIN_EMAIL,
@@ -82,6 +85,21 @@ class AppPages {
       name: Routes.PAYMENT,
       page: () => PaymentPage(),
       binding: PaymentBinding(),
+    ),
+    GetPage(
+      name: Routes.CREATE_ACCOUNT,
+      page: () => CreateAccountPage(),
+      binding: CreateAccountBinding(),
+    ),
+    GetPage(
+      name: Routes.OTP_AUTHEN,
+      page: () => LoginOTPPage(),
+      binding: OTPBinding(),
+    ),
+    GetPage(
+      name: Routes.POST_DETAIL,
+      page: () => PostDetailPage(),
+      binding: PostDetailBinding(),
     ),
     // GetPage(
     //   name: Routes.LOGOUT,

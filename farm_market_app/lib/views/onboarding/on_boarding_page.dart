@@ -16,7 +16,7 @@ class OnBoardingPage extends GetView<OnBoardingController> {
           onPageChanged: controller.selectedIndex,
           itemCount: controller.onBoardingPages.length,
           itemBuilder: (context, index) {
-            return Container(
+            return SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,

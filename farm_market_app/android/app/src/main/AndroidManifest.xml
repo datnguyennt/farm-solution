@@ -18,6 +18,8 @@
         android:label="FarmApp"
         android:icon="@mipmap/launcher_icon"
        >
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCtncWNBvfoMyf9-W_fU_OSjKr9ntsti6E"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
@@ -52,5 +54,18 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <!-- ZaloFlutter -->
+        <meta-data
+            android:name="com.zing.zalo.zalosdk.appID"
+            android:value="@string/zalo_flutter_app_id" />
+        <activity
+            android:name="com.zing.zalo.zalosdk.oauth.BrowserLoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="@string/zalo_flutter_app_id_protocol"/>
+            </intent-filter>
+        </activity>
     </application>
 </manifest>

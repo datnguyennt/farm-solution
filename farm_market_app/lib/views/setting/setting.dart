@@ -3,3 +3,4 @@ export 'payment_page.dart';
 export 'profile_page.dart';
 export 'setting_app_page.dart';
 export 'setting_page.dart';
+export 'change_password_page.dart';

@@ -12,8 +12,6 @@ class Account {
   String? userName;
   @JsonKey(name: "password")
   String? password;
-  @JsonKey(name: "confirmPassword")
-  String? confirmPassword;
   @JsonKey(name: "keySecurity")
   String? keySecurity;
   @JsonKey(name: "address")

@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:farm_market_app/constants/constants.dart';
 import 'package:farm_market_app/controllers/controller.dart';
 import 'package:farm_market_app/core/core.dart';
 import 'package:flutter/material.dart';
@@ -16,16 +17,16 @@ class _ImageSlideState extends State<ImageSlide> {
   int _current = 0;
   List<Widget>? imageSlider;
   final _controller = Get.put(DashboardController());
-
+String URL = '';
   @override
   void initState() {
-    imageSlider = _controller.imgList.map((e) => Container(
+    imageSlider = _controller.arrBanner.map((e) => Container(
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10.r),
         child: Stack(
           children: [
             CachedNetworkImage(
-              imageUrl: e,
+              imageUrl: EndPoint.baseUrl + e.imagePath.toString(),
               errorWidget: (context, url, error) =>
                   const Icon(Icons.error),
               progressIndicatorBuilder: (context, url, downloadProgress) =>
@@ -82,8 +83,8 @@ class _ImageSlideState extends State<ImageSlide> {
             padding: EdgeInsets.only(bottom: 10.h),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: _controller.imgList.map((e) {
-                int index = _controller.imgList.indexOf(e);
+              children: _controller.arrBanner.map((e) {
+                int index = _controller.arrBanner.indexOf(e);
                 return Container(
                   width: _current == index ? 12.h : 8.h,
                   height: _current == index ? 12.h : 8.h,

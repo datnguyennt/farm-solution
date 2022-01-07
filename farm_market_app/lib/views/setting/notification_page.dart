@@ -8,7 +8,9 @@ class NotificationPage extends GetView<NotificationController> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: appBar('notification'.tr),
+    );
   }
 
   AppBar appBar(String title) {

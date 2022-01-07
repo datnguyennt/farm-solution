@@ -1,5 +1,6 @@
 class EndPoint {
-  static const String baseUrl = 'https://chonongsanapi.azurewebsites.net/api';
+  static const String baseUrl = 'https://chonongsanapi.azurewebsites.net';
+  //static const String baseUrl = 'https://localhost:5001';
 
   static const int connectionTimeout = 5000;
   static const int receiveTimeout = 5000;
@@ -11,7 +12,13 @@ class EndPoint {
   static const int ERROR_SERVER = 500;
   static const int ERROR_DISCONNECT = -1;
 
-  static const String login = baseUrl + '/tai-khoan/dang-nhap';
-  static const String getAllUser = baseUrl + '/tai-khoan';
+  static const String login = baseUrl + '/api/tai-khoan/dang-nhap';
+  static const String loginByPhone = baseUrl + '/api/tai-khoan/so-dien-thoai';
+  static const String getAllUser = baseUrl + '/api/tai-khoan';
+  static const String getAllPost = baseUrl + '/api/tin-dang/tat-ca-tin-dang-cho-app';
+  static const String getAllBanner = baseUrl + '/api/banner/tat-ca-banner';
+  static const String changePassword = baseUrl + '/api/tai-khoan/doi-mat-khau';
+  static const String createAccount = baseUrl + '/api/tai-khoan/dang-ky-khach-hang';
+  static const String updateAccount = baseUrl + '/api/tai-khoan/cap-nhat-tai-khoan';
 
 }

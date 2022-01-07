@@ -13,3 +13,8 @@ export 'profile_binding.dart';
 export 'notification_binding.dart';
 export 'payment_binding.dart';
 export 'setting_app_binding.dart';
+export 'change_password_binding.dart';
+export 'login_email_binding.dart';
+export 'create_account_binding.dart';
+export 'otp_binding.dart';
+export 'post_detail_binding.dart';

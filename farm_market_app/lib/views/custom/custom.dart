@@ -3,3 +3,5 @@ export 'custom_animated_bottom_bar.dart';
 export 'custom_text_field.dart';
 export 'product_item.dart';
 export 'item_setting.dart';
+export 'image_picker.dart';
+export 'image_slide.dart';

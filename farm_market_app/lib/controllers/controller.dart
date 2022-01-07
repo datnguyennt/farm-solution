@@ -14,3 +14,8 @@ export 'profile_controller.dart';
 export 'setting_app_controller.dart';
 export 'payment_controller.dart';
 export 'login_email_controller.dart';
+export 'change_password_controller.dart';
+export 'login_zalo_controller.dart';
+export 'otp_controller.dart';
+export 'create_account_controller.dart';
+export 'post_detail_controller.dart';

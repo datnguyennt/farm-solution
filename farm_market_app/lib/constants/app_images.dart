@@ -24,4 +24,6 @@ class AppImages {
   static const String noImage = pathImage + 'no_image.jpeg';
   static const String noUser = pathImage + 'no_user.jpg';
   static const String iconCamera = pathImage + 'iconCamera.svg';
+  static const String iconChangePassword = pathImage + 'iconChangePassword.png';
+  static const String iconVietNam = pathImage + 'vietnam_icon.png';
 }

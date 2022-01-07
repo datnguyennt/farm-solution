@@ -12,7 +12,6 @@ Account _$AccountFromJson(Map<String, dynamic> json) {
     ..phoneNumber = json['phoneNumber'] as String?
     ..userName = json['userName'] as String?
     ..password = json['password'] as String?
-    ..confirmPassword = json['confirmPassword'] as String?
     ..keySecurity = json['keySecurity'] as String?
     ..address = json['address'] as String?
     ..fullName = json['fullName'] as String?
@@ -38,7 +37,6 @@ Map<String, dynamic> _$AccountToJson(Account instance) => <String, dynamic>{
       'phoneNumber': instance.phoneNumber,
       'userName': instance.userName,
       'password': instance.password,
-      'confirmPassword': instance.confirmPassword,
       'keySecurity': instance.keySecurity,
       'address': instance.address,
       'fullName': instance.fullName,

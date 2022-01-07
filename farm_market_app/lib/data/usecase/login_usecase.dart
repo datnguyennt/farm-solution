@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:farm_market_app/data/entity/account.dart';
+import 'package:farm_market_app/constants/constants.dart';
 import 'package:farm_market_app/data/request/login_request.dart';
 import 'package:farm_market_app/data/response/login_response.dart';
 import '../network_response_model.dart';
@@ -14,11 +14,18 @@ class LoginUsecase extends BaseUsecase {
     if (isDisconnect) NetworkResponse.withDisconnect();
     LoginResponse response = LoginResponse();
     try {
-      String stringResponse = await apiClient.login(request);
+      var bodyValue = request.toJson();
+      var bodydata = json.encode(bodyValue); // important
+
+      var stringResponse = await apiClient.login(bodydata);
+      //print('day nè trời ơi là tời${stringResponse}');
       response = LoginResponse.fromJson(jsonDecode(stringResponse));
-      print('day nè trời ơi là tời${response}');
     } on DioError catch (e) {
-      NetworkResponse.withErrorConvert(e);
+      if (e.response?.statusCode == 400) {
+        response = LoginResponse.fromJson(jsonDecode(e.response?.data));
+      } else {
+        NetworkResponse.withErrorConvert(e);
+      }
     }
     return response;
   }

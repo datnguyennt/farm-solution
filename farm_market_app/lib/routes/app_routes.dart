@@ -15,4 +15,8 @@ abstract class Routes {
   static const SETTING_APP = '/setting_app';
   static const PAYMENT = '/payment';
   static const LOGOUT = '/logout';
+  static const CHANGE_PASSWORD = '/change_password';
+  static const CREATE_ACCOUNT = '/create_account';
+  static const OTP_AUTHEN = '/otp_authenication';
+  static const POST_DETAIL = '/post/post_detail';
 }
