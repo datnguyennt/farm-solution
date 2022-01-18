@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:farm_market_app/constants/constants.dart';
 import 'package:farm_market_app/data/data.dart';
-import 'package:farm_market_app/data/response/change_password_response.dart';
 import 'package:farm_market_app/data/response/update_account_response.dart';
 import '../network_response_model.dart';
 import '../wifi_service.dart';

@@ -1,12 +1,22 @@
 import 'package:farm_market_app/routes/app_routes.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:farm_market_app/views/dashboard/dashboard_page.dart';
+import 'package:farm_market_app/views/views.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeController extends GetxController {
   var tabIndex = 0;
+  final List<Widget> screens = [
+    DashBoardPage(),
+    MyPostPage(),
+    LovePage(),
+    SettingPage(),
+  ];
+
+  var currentTab = 0;
+  final PageStorageBucket bucket = PageStorageBucket();
+  Widget currentScreen = DashBoardPage();
 
   void changeTabIndex(int index) {
     tabIndex = index;
@@ -36,5 +46,6 @@ class HomeController extends GetxController {
     tabIndex = 0;
     await requestLocationPermission();
   }
+
 }
 

@@ -52,8 +52,8 @@ class AppPages {
       binding: LoveBinding(),
     ),
     GetPage(
-      name: Routes.GROCERY,
-      page: () => GroceryPage(),
+      name: Routes.MY_POST,
+      page: () => MyPostPage(),
       binding: GroceryBinding(),
     ),
     GetPage(

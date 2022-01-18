@@ -18,7 +18,7 @@ class PaymentPage extends GetView<PaymentController> {
             onTap: () {
               showDialog(
                 context: context,
-                builder: (_) => ImagePickerWidget(),
+                builder: (_) => Container(),
               );
             },
             child: Container(

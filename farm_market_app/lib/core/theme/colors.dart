@@ -64,6 +64,7 @@ class AppColor {
   static final Color notificationBg = Color(0xFF29C3DB);
   static final Color changePasswordBg = Color(0xFFF16041);
   static final Color addImage = Color(0xFF6FD5AB);
+  static final Color grayCountImagePost = Color(0xFFF4F4F4);
 
   static LinearGradient _linearLR({required List<Color> colors}) =>
       LinearGradient(

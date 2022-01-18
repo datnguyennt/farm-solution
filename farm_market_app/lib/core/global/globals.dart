@@ -1,5 +1,4 @@
 import 'package:farm_market_app/data/entity/account.dart';
-import 'package:farm_market_app/models/account_user.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 class Globals {

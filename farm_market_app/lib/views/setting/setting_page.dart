@@ -229,7 +229,6 @@ class SettingPage extends GetView<SettingController> {
                               ? ItemSetting(
                                   action: () {
                                     print('logout'.tr);
-
                                     _controller.logout();
                                   },
                                   title: 'logout'.tr,

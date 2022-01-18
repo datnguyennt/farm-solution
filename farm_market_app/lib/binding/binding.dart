@@ -4,7 +4,7 @@ export 'login_binding.dart';
 export 'home_binding.dart';
 export 'post_item_binding.dart';
 export 'love_binding.dart';
-export 'grocery_binding.dart';
+export 'my_post_binding.dart';
 export 'dashboard_binding.dart';
 export 'setting_binding.dart';
 export 'on_boarding_binding.dart';

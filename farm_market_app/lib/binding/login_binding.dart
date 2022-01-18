@@ -5,7 +5,7 @@ class LoginBinding implements Bindings {
   @override
   void dependencies() {
     Get.put<LoginController>(LoginController());
-    Get.lazyPut<DashboardController>(() => DashboardController());
+    Get.put<HomeController>(HomeController());
 
   }
 }

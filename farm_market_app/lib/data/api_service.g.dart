@@ -8,7 +8,7 @@ part of 'api_service.dart';
 
 class _RestClient implements RestClient {
   _RestClient(this._dio, {this.baseUrl}) {
-    baseUrl ??= 'https://chonongsanapi.azurewebsites.net';
+    baseUrl ??= 'http://192.168.1.7:5001';
   }
 
   final Dio _dio;
@@ -20,12 +20,12 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = data;
-    final _result = await _dio.fetch<String>(_setStreamType<String>(Options(
-            method: 'POST', headers: <String, dynamic>{}, extra: _extra)
-        .compose(_dio.options,
-            'https://chonongsanapi.azurewebsites.net/api/tai-khoan/dang-nhap',
-            queryParameters: queryParameters, data: _data)
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final _result = await _dio.fetch<String>(_setStreamType<String>(
+        Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
+            .compose(
+                _dio.options, 'http://192.168.1.7:5001/api/tai-khoan/dang-nhap',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = _result.data!;
     return value;
   }
@@ -41,8 +41,7 @@ class _RestClient implements RestClient {
             headers: <String, dynamic>{},
             extra: _extra,
             contentType: 'application/x-www-form-urlencoded')
-        .compose(_dio.options,
-            'https://chonongsanapi.azurewebsites.net/api/tai-khoan',
+        .compose(_dio.options, 'http://192.168.1.7:5001/api/tai-khoan',
             queryParameters: queryParameters, data: _data)
         .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = _result.data!;
@@ -54,12 +53,41 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<String>(_setStreamType<String>(Options(
-            method: 'GET', headers: <String, dynamic>{}, extra: _extra)
-        .compose(_dio.options,
-            'https://chonongsanapi.azurewebsites.net/api/tin-dang/tat-ca-tin-dang-cho-app',
-            queryParameters: queryParameters, data: _data)
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final _result = await _dio.fetch<String>(_setStreamType<String>(
+        Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
+            .compose(_dio.options,
+                'http://192.168.1.7:5001/api/tin-dang/tat-ca-tin-dang-cho-app',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data!;
+    return value;
+  }
+
+  @override
+  Future<String> getWeightType() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<String>(_setStreamType<String>(
+        Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
+            .compose(_dio.options, 'http://192.168.1.7:5001/api/don-vi/tat-ca',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data!;
+    return value;
+  }
+
+  @override
+  Future<String> getCategory() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<String>(_setStreamType<String>(
+        Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
+            .compose(_dio.options,
+                'http://192.168.1.7:5001/api/danh-muc/tat-ca-danh-muc',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = _result.data!;
     return value;
   }
@@ -71,8 +99,8 @@ class _RestClient implements RestClient {
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<String>(_setStreamType<String>(Options(
             method: 'GET', headers: <String, dynamic>{}, extra: _extra)
-        .compose(_dio.options,
-            'https://chonongsanapi.azurewebsites.net/api/banner/tat-ca-banner',
+        .compose(
+            _dio.options, 'http://192.168.1.7:5001/api/banner/tat-ca-banner',
             queryParameters: queryParameters, data: _data)
         .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = _result.data!;
@@ -86,8 +114,8 @@ class _RestClient implements RestClient {
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<String>(_setStreamType<String>(Options(
             method: 'PUT', headers: <String, dynamic>{}, extra: _extra)
-        .compose(_dio.options,
-            'https://chonongsanapi.azurewebsites.net/api/tai-khoan/doi-mat-khau',
+        .compose(
+            _dio.options, 'http://192.168.1.7:5001/api/tai-khoan/doi-mat-khau',
             queryParameters: queryParameters, data: _data)
         .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = _result.data!;
@@ -99,10 +127,55 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<String>(_setStreamType<String>(
+        Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
+            .compose(_dio.options,
+                'http://192.168.1.7:5001/api/tai-khoan/dang-ky-khach-hang',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data!;
+    return value;
+  }
+
+  @override
+  Future<String> createPost(formData) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<String>(_setStreamType<String>(
+        Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
+            .compose(
+                _dio.options, 'http://192.168.1.7:5001/api/tin-dang/tao-moi',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data!;
+    return value;
+  }
+
+  @override
+  Future<String> getPostDetail(postID) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<String>(_setStreamType<String>(
+        Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
+            .compose(
+                _dio.options, 'http://192.168.1.7:5001/api/tin-dang/$postID',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data!;
+    return value;
+  }
+
+  @override
+  Future<String> getAllPostByAccount(accountID) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
     final _result = await _dio.fetch<String>(_setStreamType<String>(Options(
             method: 'POST', headers: <String, dynamic>{}, extra: _extra)
         .compose(_dio.options,
-            'https://chonongsanapi.azurewebsites.net/api/khach-hang/dang-ky',
+            'http://192.168.1.7:5001/api/tin-dang/all-post-by-accountId/$accountID',
             queryParameters: queryParameters, data: _data)
         .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = _result.data!;
@@ -117,7 +190,22 @@ class _RestClient implements RestClient {
     final _result = await _dio.fetch<String>(_setStreamType<String>(Options(
             method: 'GET', headers: <String, dynamic>{}, extra: _extra)
         .compose(_dio.options,
-            'https://chonongsanapi.azurewebsites.net/api/tai-khoan/so-dien-thoai/$phoneNumber',
+            'http://192.168.1.7:5001/api/tai-khoan/so-dien-thoai/$phoneNumber',
+            queryParameters: queryParameters, data: _data)
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data!;
+    return value;
+  }
+
+  @override
+  Future<String> getAccountById(accountID) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<String>(_setStreamType<String>(Options(
+            method: 'GET', headers: <String, dynamic>{}, extra: _extra)
+        .compose(
+            _dio.options, 'http://192.168.1.7:5001/api/tai-khoan/$accountID',
             queryParameters: queryParameters, data: _data)
         .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = _result.data!;
@@ -132,7 +220,7 @@ class _RestClient implements RestClient {
     final _result = await _dio.fetch<String>(_setStreamType<String>(Options(
             method: 'PUT', headers: <String, dynamic>{}, extra: _extra)
         .compose(_dio.options,
-            'https://chonongsanapi.azurewebsites.net/api/tai-khoan/cap-nhat-tai-khoan/$AccountID',
+            'http://192.168.1.7:5001/api/tai-khoan/cap-nhat-tai-khoan/$AccountID',
             queryParameters: queryParameters, data: _data)
         .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = _result.data!;

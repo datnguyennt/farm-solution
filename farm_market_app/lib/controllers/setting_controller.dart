@@ -5,7 +5,6 @@ import 'package:farm_market_app/routes/app_routes.dart';
 import 'package:farm_market_app/utils/toast/toast_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingController extends GetxController with ToastUtils{
   final String title = "Cai dat";
@@ -25,6 +24,6 @@ class SettingController extends GetxController with ToastUtils{
     await _auth.signOut();
     sharedPref.remove("user");
     Globals.setMainUser(Account());
-    Get.offAllNamed(Routes.LOGIN_EMAIL);
+    Get.toNamed(Routes.LOGIN_EMAIL);
   }
 }

@@ -9,6 +9,7 @@ class AppImages {
   static const String iconLoginPhone = pathImage + 'iconLoginPhone.svg';
   static const String iconLoginZalo = pathImage + 'iconLoginZalo.svg';
   static const String iconLoginGoogle = pathImage + 'iconLoginGoogle.svg';
+  static const String iconHeart = pathImage + 'iconHeart.svg';
   static const String iconLoginApple = pathImage + 'login_apple.svg';
   static const String iconNext = pathImage + 'forward.png';
   static const String onBoarding1 = pathImage + 'splash1.gif';
@@ -22,8 +23,10 @@ class AppImages {
   static const String iconPayment = pathImage + 'wallet.png';
   static const String iconLogout = pathImage + 'logout.png';
   static const String noImage = pathImage + 'no_image.jpeg';
+  static const String errorImage = pathImage + '404.png';
   static const String noUser = pathImage + 'no_user.jpg';
   static const String iconCamera = pathImage + 'iconCamera.svg';
   static const String iconChangePassword = pathImage + 'iconChangePassword.png';
   static const String iconVietNam = pathImage + 'vietnam_icon.png';
+  static const String iconCountImagePost = pathImage + 'count_image_post.svg';
 }

@@ -6,3 +6,7 @@ export 'change_password_usecase.dart';
 export 'phone_login_usecase.dart';
 export 'create_account_usecase.dart';
 export 'update_account_usecase.dart';
+export 'get_account_by_id.dart';
+export 'get_post_detail_usecase.dart';
+export 'create_post_usecase.dart';
+export 'get_all_post_by_account_usecase.dart';

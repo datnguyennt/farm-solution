@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:farm_market_app/constants/app_images.dart';
+import 'package:farm_market_app/constants/constants.dart';
 import 'package:farm_market_app/core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -62,15 +63,34 @@ class ProfilePage extends GetView<ProfileController> {
                             clipBehavior: Clip.none,
                             fit: StackFit.expand,
                             children: [
-                              CircleAvatar(
-                                backgroundImage: _controller.pickedFile != null
-                                    ? FileImage(
-                                        File(_controller.pickedFile!.path),
-                                        // height: 300.0,
-                                        // fit: BoxFit.scaleDown,
-                                      )
-                                    : AssetImage(AppImages.noUser)
-                                        as ImageProvider,
+                              //Nếu người dùng không có avatar
+                              Visibility(
+                                visible: Globals.mainUser.avatar == null ? false : true,
+                                child: CircleAvatar(
+                                  backgroundImage: _controller.pickedFile != null
+                                      ? FileImage(
+                                          File(_controller.pickedFile!.path),
+                                          // height: 300.0,
+                                          // fit: BoxFit.scaleDown,
+                                        )
+                                      : AssetImage(AppImages.noUser)
+                                          as ImageProvider,
+                                ),
+                              ),
+                              //Nếu người dùng có avatar
+                              Visibility(
+                                visible: Globals.mainUser.avatar != null ? true : false,
+                                child: CircleAvatar(
+                                  backgroundColor: AppColor.gray,
+                                  backgroundImage: _controller.pickedFile != null
+                                      ? FileImage(
+                                          File(_controller.pickedFile!.path),
+                                          // height: 300.0,
+                                          // fit: BoxFit.scaleDown,
+                                        )
+                                      : NetworkImage(EndPoint.baseUrl + Globals.mainUser.avatar.toString())
+                                          as ImageProvider,
+                                ),
                               ),
                               Positioned(
                                 right: -16,

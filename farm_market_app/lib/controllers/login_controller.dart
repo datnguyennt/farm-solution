@@ -68,12 +68,6 @@ class LoginController extends GetxController with ToastUtils {
         phoneNumber: getPhoneNum(),
         //phoneNumber: '+18888888',
         verificationCompleted: (phone){},
-        //     (PhoneAuthCredential phonesAuthCredentials) async {
-        //   await auth
-        //       .signInWithCredential(phonesAuthCredentials)
-        //       .then((value) => log('Login Successfully'));
-        //   isLoading.value = false;
-        // },
         verificationFailed: (FirebaseAuthException  e) async {
           if (e.code == 'invalid-phone-number') {
             log('The provided phone number is not valid.');
@@ -93,7 +87,6 @@ class LoginController extends GetxController with ToastUtils {
           Get.toNamed(Routes.OTP_AUTHEN);
           isLoading.value = false;
         },
-        timeout: const Duration(seconds: 60),
         codeAutoRetrievalTimeout: (String verificationId) {
           log(verificationId);
         },

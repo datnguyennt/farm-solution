@@ -33,7 +33,7 @@ final Map<String, String> viVN = {
   'weight_type':'Đơn vị tính',
   'detail':'Mô tả chi tiết',
   'add_image':'Thêm ảnh mô tả cho nông sản của bạn',
-  'select_image':'Chọn từ 1 - 5 ảnh',
+  'select_image':'Chọn từ 1 - 10 ảnh',
   'login_to_continue':'Đăng nhập để tiếp tục',
   'msg_disconnect': 'Lỗi mất kết nối!',
   'msg_error_convert': 'Lỗi khi xử lý dữ liệu!',
@@ -48,7 +48,20 @@ final Map<String, String> viVN = {
   'phone_invalid':'Số điện thoại không đúng định dạng',
   'get_current_location':'Lấy vị trí hiện tại',
   'update_account':'Cập nhật thông tin cá nhân',
-  '':'',
-  '':'',
-  '':'',
+  'lorem':'Lorem Ipsum is simply dummy text of the printing and '
+      'typesetting industry. Lorem Ipsum has been the industry s '
+      'standard dummy text ever since the 1500s, when an unknown'
+      ' printer took a galley of type and scrambled it to make'
+      ' a type specimen book. It has survived not only five centuries'
+      ', but also the leap into electronic typesetting, remaining essentially '
+      'unchanged. It was popularised in the 1960s with '
+      'the release of Letraset sheets containing Lorem Ipsum'
+      ' passages, and more recently with desktop publishing '
+      'software like Aldus PageMaker including versions of Lorem Ipsum',
+  'post_detail':'Chi tiết bài đăng',
+  'is_showing':'Đang hiển thị',
+  'is_pending':'Đang đợi duyệt',
+  'suspended':'Bị từ chối',
+  'post_sold':'Đã bán',
+  'post_empty':'Không có tin nào',
 };

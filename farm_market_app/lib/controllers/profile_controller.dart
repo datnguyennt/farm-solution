@@ -17,8 +17,7 @@ import 'package:flutter_google_places/flutter_google_places.dart';
 
 class ProfileController extends GetxController {
   final updateAccountForm = GlobalKey<FormState>(debugLabel: 'updateAccountForm');
-  Position? position;
-  RxString location = ''.obs;
+
 
   TextEditingController fullNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -29,16 +28,16 @@ class ProfileController extends GetxController {
   RxString email = ''.obs;
   RxString phoneNumber = ''.obs;
   RxString address = ''.obs;
+  Position? position;
+  RxString location = ''.obs;
   RxString userName = ''.obs;
   RxString message = ''.obs;
-  var file;
+  XFile? pickedFile;
   final UpdateAccountUsecase _updateAccountUsecase = UpdateAccountUsecase();
   final PhoneLoginUsecase _loginUsecase = PhoneLoginUsecase();
   SharedPref sharedPref = SharedPref();
-  final _homeController = Get.put(HomeController());
   RxBool isLoading = false.obs;
   Dio.FormData formData = Dio.FormData();
-  XFile? pickedFile;
 
   void selectImage(ImageSource imageSource) async {
     try {
@@ -101,8 +100,8 @@ class ProfileController extends GetxController {
   }
 
   void getDataFromTextField() {
-    var file =
-        pickedFile != null ? File(pickedFile!.path) : Globals.mainUser.avatar;
+    // pickedFile =
+    //     pickedFile != null ? File(pickedFile!.path) : Globals.mainUser.avatar;
     fullName.value = fullNameController.text.trim().isEmpty
         ? Globals.mainUser.fullName.toString()
         : fullNameController.text.trim();
@@ -132,7 +131,7 @@ class ProfileController extends GetxController {
     if (checkValidate()) {
       getDataFromTextField();
       if (pickedFile != null) {
-        file = File(pickedFile!.path);
+        //file = File(pickedFile!.path);
         String imageName = pickedFile!.path.split('/').last;
         formData = Dio.FormData.fromMap({
           'AccountID': Globals.mainUser.accountId.toString(),
@@ -141,10 +140,8 @@ class ProfileController extends GetxController {
           'Email': email.value,
           'Address': address.value,
           'UserName': userName.value,
-          "ThumbnailImage": await Dio.MultipartFile.fromFile(
-            file.path,
-            filename: imageName,
-          ),
+          "ThumbnailImage": await Dio.MultipartFile.fromFile(pickedFile!.path,
+              filename: pickedFile!.path.split('/').last),
         });
       } else {
         formData = Dio.FormData.fromMap({

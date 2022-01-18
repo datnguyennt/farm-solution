@@ -38,7 +38,7 @@ class LoginEmailController extends GetxController with ToastUtils {
         sharedPref.save("user", Globals.mainUser);
         clearTextField();
         isLoading.value = false;
-        Get.offAllNamed(Routes.HOME);
+        Get.toNamed(Routes.HOME);
       } else {
         isLoading.value = false;
         errorToast(pos.message.toString());

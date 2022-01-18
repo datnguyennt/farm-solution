@@ -8,6 +8,7 @@ import 'package:farm_market_app/models/model.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:zalo_flutter/zalo_flutter.dart';
 
 class DashboardController extends GetxController {
@@ -21,6 +22,8 @@ class DashboardController extends GetxController {
   RxBool isLoadingBanner = false.obs;
   RxBool isLoadingLocation = false.obs;
   RxInt currentIndexBanner = 0.obs;
+  final formatCurrency = NumberFormat.currency(locale: 'vi', symbol: "VNĐ");
+
   Future<Position> getGeoLocationPosition() async {
     bool serviceEnabled;
     LocationPermission permission;
@@ -53,17 +56,16 @@ class DashboardController extends GetxController {
     '${place.street ?? ''}, ${place.subAdministrativeArea}, ${place.administrativeArea}';
     isLoadingLocation.value = false;
   }
-
-  List<Post> get arrPost => _arrPost;
-
-  set arrPost(List<Post> posts) {
-    _arrPost = posts;
-  }
-
   List<Banner> get arrBanner => _arrBanner;
 
   set arrBanner(List<Banner> banner) {
     _arrBanner = banner;
+  }
+
+  List<Post> get arrPost => _arrPost;
+
+  set arrPost(List<Post> post) {
+    _arrPost = post;
   }
 
   final GetAllPostUsecase _getAllPostUsecase = GetAllPostUsecase();
@@ -71,13 +73,14 @@ class DashboardController extends GetxController {
 
   //Danh sách bài đăng
   Future<List<Post>> getAllPost() async {
-    //String json = jsonEncode(GetIcoinHistoryRequest().toJson());
     var data = await _getAllPostUsecase.getAllPostRespone();
     if (data != null) {
-      arrPost.map((job) => Post()).toList();
-      print(data.length);
+      arrPost = data;
+      update();
+      print(data[0].postID);
       return data;
     } else {
+      update();
       return [];
     }
   }
@@ -101,15 +104,18 @@ class DashboardController extends GetxController {
     //     position!.longitude, double.parse(post.lat!), double.parse(post.lng!));
     // distance = distanceInMeters / 1000;
     //distance = (distanceInMeters / 1000).toStringAsFixed(2);
-    for(var i = 0; i< _arrPost.length; i++) {
-      _arrPost[i].distance = (Geolocator.distanceBetween(position!.latitude,
-          position!.longitude, double.parse(_arrPost[i].lat!), double.parse(_arrPost[i].lng!)))/1000;
+    for(var i = 0; i< arrPost.length; i++) {
+      arrPost[i].distance = (Geolocator.distanceBetween(position!.latitude,
+          position!.longitude, double.parse(arrPost[i].lat!), double.parse(arrPost[i].lng!)))/1000;
       //print("${ls[i].name} is electric? ${ls[i].isElectric}");
     }
     //print(distance.toString());
     //return distance;
   }
-
+  Future<void> reFreshPage()async{
+    onInit();
+    return Future.delayed(const Duration(seconds: 1));
+  }
   @override
   void onInit() async {
     // TODO: implement onInit
@@ -119,28 +125,12 @@ class DashboardController extends GetxController {
     isLoadingLocation.value = true;
     position = await getGeoLocationPosition();
     getAddressFromLatLong(position!);
-    _arrPost = await getAllPost();
+    arrPost = await getAllPost();
     _arrBanner = await getAllBanner();
     calculateDistance();
-    _arrPost.sort((a, b) => a.distance!.compareTo(b.distance!));
+    arrPost.sort((a, b) => a.distance!.compareTo(b.distance!));
     isLoading.value = false;
     //calculateDistance(arrPost[0]);
-  }
-  @override
-  void onReady() async{
-    // TODO: implement onReady
-    super.onReady();
-    isLoading.value = true;
-    isLoadingBanner.value = true;
-    isLoadingLocation.value = true;
-    position = await getGeoLocationPosition();
-    getAddressFromLatLong(position!);
-    _arrPost = await getAllPost();
-    _arrBanner = await getAllBanner();
-    calculateDistance();
-    _arrPost.sort((a, b) => a.distance!.compareTo(b.distance!));
-    isLoading.value = false;
-
   }
 
   void loginZalo() async {

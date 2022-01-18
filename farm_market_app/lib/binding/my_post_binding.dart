@@ -5,6 +5,6 @@ import 'package:get/get.dart';
 class GroceryBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put<GroceryController>(GroceryController());
+    Get.put<MyPostController>(MyPostController());
   }
 }

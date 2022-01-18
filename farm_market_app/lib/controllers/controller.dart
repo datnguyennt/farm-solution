@@ -7,7 +7,7 @@ export 'dashboard_controller.dart';
 export 'love_controller.dart';
 export 'post_item_controller.dart';
 export 'setting_controller.dart';
-export 'grocery_controller.dart';
+export 'my_post_controller.dart';
 export 'on_boarding_controller.dart';
 export 'notification_controller.dart';
 export 'profile_controller.dart';

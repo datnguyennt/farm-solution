@@ -44,7 +44,9 @@ dependencies:
   zalo_flutter: ^0.0.3
   progress_dialog_null_safe: ^1.0.6
   persistent_bottom_nav_bar: ^4.0.2
-
+  like_button: ^2.0.4
+  url_launcher: ^6.0.18
+  video_player: ^2.2.11
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -59,13 +61,13 @@ flutter_icons:
 flutter:
   uses-material-design: true
   fonts:
-    - family: Inter
+    - family: roboto
       fonts:
-        - asset: assets/fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/Roboto-Regular.ttf
           weight: 400
-    - family: Inter Bold
+    - family: roboto_bold
       fonts:
-        - asset: assets/fonts/Poppins-SemiBold.ttf
+        - asset: assets/fonts/Roboto-Bold.ttf
           weight: 800
   assets:
     - assets/graphics/

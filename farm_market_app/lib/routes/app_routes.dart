@@ -8,7 +8,7 @@ abstract class Routes {
   static const LOVE = '/love';
   static const SETTING = '/setting';
   static const POST_ITEM = '/post_item';
-  static const GROCERY = '/grocery';
+  static const MY_POST = '/my_post';
   static const DASHBOARD = '/dashboard';
   static const PROFILE = '/profile';
   static const NOTIFICATION = '/notification';

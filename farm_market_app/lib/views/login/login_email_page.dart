@@ -10,8 +10,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class LoginEmailPage extends GetView<LoginEmailController> {
-  final loginZaloController = Get.put(LoginZaloController());
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -208,7 +206,7 @@ class LoginEmailPage extends GetView<LoginEmailController> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     _customButton(AppImages.iconLoginZalo, () async {
-                      await loginZaloController.loginZalo();
+                      //await loginZaloController.loginZalo();
                     }),
                     SizedBox(
                       width: 10.w,
